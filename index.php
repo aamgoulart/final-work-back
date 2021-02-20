@@ -1,13 +1,19 @@
 <?php
 // require "bootstrap.php";
 // use Src\Controller\StudentController;
-$php_bd_connection = new mysqli("localhost", "247195", "123456ag", "247195");
+$db_handle = pg_connect("host=ec2-3-214-3-162.compute-1.amazonaws.com dbname=dbkij3sfomg5mf user=lybhospqqudnuy password=9ab37317d12919bdfdd3c607c3f02d3ec7f6cf8875137033c447502f3316112c");
 
-   if($php_bd_connection->connect_error) {
-      echo "Desconnectado  ", $php_bd_connection->connect_error;
-   } else {
-      echo "Conectado";
-   }
+if ($db_handle) {
+
+echo 'Connection attempt succeeded.';
+
+} else {
+
+echo 'Connection attempt failed.';
+
+}
+
+pg_close($db_handle);
 
 // header("Access-Control-Allow-Origin: *");
 // header("Content-Type: application/json; charset=UTF-8");
