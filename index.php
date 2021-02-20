@@ -1,32 +1,39 @@
 <?php
-require "../bootstrap.php";
-use Src\Controller\StudentController;
+// require "bootstrap.php";
+// use Src\Controller\StudentController;
+$php_bd_connection = new mysqli("localhost", "247195", "123456ag", "247195");
 
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
-header("Access-Control-Max-Age: 3600");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+   if($php_bd_connection->connect_error) {
+      echo "Desconnectado  ", $php_bd_connection->connect_error;
+   } else {
+      echo "Conectado";
+   }
 
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$uri = explode( '/', $uri );
+// header("Access-Control-Allow-Origin: *");
+// header("Content-Type: application/json; charset=UTF-8");
+// header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
+// header("Access-Control-Max-Age: 3600");
+// header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-// all of our endpoints start with /person
-// everything else results in a 404 Not Found
-if ($uri[1] !== 'person') {
-    header("HTTP/1.1 404 Not Found");
-    exit();
-}
+// $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+// $uri = explode( '/', $uri );
 
-// the user id is, of course, optional and must be a number:
-$userId = null;
-if (isset($uri[2])) {
-    $userId = (int) $uri[2];
-}
+// // all of our endpoints start with /person
+// // everything else results in a 404 Not Found
+// if ($uri[1] !== 'person') {
+//     header("HTTP/1.1 404 Not Found");
+//     exit();
+// }
 
-$requestMethod = $_SERVER["REQUEST_METHOD"];
+// // the user id is, of course, optional and must be a number:
+// $userId = null;
+// if (isset($uri[2])) {
+//     $userId = (int) $uri[2];
+// }
 
-// pass the request method and user ID to the PersonController and process the HTTP request:
-$controller = new StudentController($dbConnection, $requestMethod, $userId);
-$controller->processRequest();
+// $requestMethod = $_SERVER["REQUEST_METHOD"];
+
+// // pass the request method and user ID to the PersonController and process the HTTP request:
+// $controller = new StudentController($dbConnection, $requestMethod, $userId);
+// $controller->processRequest();
 ?>
