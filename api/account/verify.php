@@ -27,12 +27,12 @@ $product->password = isset($_GET['password']) ? $_GET['password'] : die();
 $stmt = $product->verify($product->email, $product->password);
 
     if ($stmt == null) {
-        echo json_encode(array("message" => "Person dont have access"));
+        echo json_encode(array("message" => "Person dont has access"));
 
         http_response_code(404);
     } else {
         http_response_code(200);
-        echo json_encode(array("message" => "Person have access"));
+        echo json_encode(array("message" => "Person has access"));
 
     }
 
