@@ -68,5 +68,30 @@ class Student{
         return false;
 
     }
+
+    // used when filling up the update product form
+function readOne($id){
+  
+    // query to read single record
+    $query = "SELECT 
+        id_student, name, course, term
+    FROM
+        student
+    WHERE id_student = $1;
+";
+
+    $parans = array (
+        "id_student" => $id,
+    );
+
+
+    // execute query
+    $result = pg_query_params($this->conn, $query, $parans);
+  
+    // get retrieved row
+    $row = pg_fetch_all($result);
+
+    return $row;
+}
 }
 ?>
