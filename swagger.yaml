@@ -1,0 +1,197 @@
+swagger: "2.0"
+info:
+  description: "Este é um simples servidor de login e cadastro de alunos. Você pode saber mais sobre Swagger em [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/)."
+  version: "1.0.0"
+  title: "Swagger Projeto final de Web"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "amanda.goulart@unifesp.com.br"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "final-work-back.herokuapp.com"
+basePath: "/api"
+tags:
+- name: "student"
+  description: "Todos endpoints para retornar estudantes"
+- name: "accounts"
+  description: "Verficação de usuário"
+schemes:
+- "https"
+- "http"
+paths:
+  /student/read.php:
+    get:
+      tags:
+      - "student"
+      summary: "Receber dados de TODOS estudantes"
+      description: ""
+      operationId: "addPet"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Receber objeto estudante"
+        required: true
+        schema:
+          $ref: "#/definitions/Student"
+      responses:
+        "404":
+          description: "Not found"
+        "200":
+          description: "Found"
+  /student/update.php:
+    put:
+      tags:
+      - "student"
+      summary: "Editar dados de um estudante"
+      description: ""
+      operationId: "update"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto estudante precisa ser modificado"
+        required: true
+        schema:
+          $ref: "#/definitions/Student"
+      responses:
+        "200":
+          description: "Estudante atualizado"
+        "503":
+          description: "Não foi possivel atulualizar estudante"
+  /student/read-one.php:
+    get:
+      tags:
+      - "student"
+      summary: "Encontra um estudante pelo id"
+      operationId: "read-one"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: "Status values that need to be considered for filter"
+        required: true
+        schema:
+          $ref: "#/definitions/Student"
+      responses:
+        "200":
+          description: "Estudante encontrado com sucesso"
+        "404":
+          description: "Estudante não encontrado"
+  /student/create.php:
+    post:
+      tags:
+      - "student"
+      summary: "Cria um novo estudante"
+      operationId: "create"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: "Cria um novo objeto estudante"
+        required: true
+        schema:
+          $ref: "#/definitions/Student"
+      responses:
+        "201":
+          description: "Novo estudante adicionado"
+        "400":
+          description: "Informações faltando"
+        "503":
+          description: "Não foi possivel adicionar o estudante"
+
+  /student/delete.php:
+    delete:
+      tags:
+      - "student"
+      summary: "Apaga um estudante pelo id"
+      description: "Deleta o objeto estudante"
+      operationId: "delete"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: "Deleta o objeto estudante"
+        required: true
+        schema:
+          $ref: "#/definitions/Student"
+      responses:
+        "200":
+          description: "Estudante deletado"
+        "503":
+          description: "Não foi possivel deletar o estudante"
+
+  /acconts/verify.php:
+    get:
+      tags:
+      - "accounts"
+      summary: "Returns pet inventories by status"
+      description: "Returns a map of status codes to quantities"
+      operationId: "getInventory"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters: 
+      - name: "body"
+        in: "body"
+        description: "Deleta o objeto estudante"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: "Acesso liberado"
+        "404":
+          description: "Acesso negado"
+ 
+     
+definitions:
+  User:
+    type: "object"
+    properties:
+      accounts_id:
+        type: "integer"
+        format: "int64"
+      username:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+    xml:
+      name: "User"
+  Student:
+    type: "object"
+    properties:
+      id_student:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      term:
+        type: "integer"
+        format: "int64"
+      course:
+        type: "string"
+      
+
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
