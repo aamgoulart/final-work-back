@@ -16,6 +16,8 @@ class Accounts {
     }
 
     function verify($email, $password){
+
+        $password = md5($password);
     
         // query to read single record
         $query = "SELECT 
