@@ -119,5 +119,40 @@ class Student{
     
         return false;
     }
+
+    function update(){
+  
+        // update query
+        $query = " UPDATE student 
+        SET 
+            name = $2,
+            course  = $3,
+            term = $4 
+        WHERE id_student = $1;
+    ";
+
+      
+        // prepare query statement
+
+        $parans = array (
+            "id_student" => $this->id_student,
+            "name" => $this->name,
+            "course" => $this->course,
+            "term" => $this-> term
+        );
+
+      
+      
+        // execute query
+        $result = pg_query_params($this->conn, $query, $parans);
+    
+      
+        // execute the query
+        if($result){
+            return true;
+        }
+      
+        return false;
+    }
 }
 ?>
