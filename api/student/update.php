@@ -17,16 +17,11 @@ $db = $database->getConnection();
 // prepare product object
 $product = new Student($db);
   
-// get id of product to be edited
-$data = json_decode(file_get_contents("php://input"));
-  
-// set ID property of product to be edited
-$product->id_student = $data->id_student;
-  
-// set product property values
-$product->name = $data->name;
-$product->course = $data->course;
-$product->term = $data->term;
+
+$product->id_student = isset($_GET['id_student']) ? $_GET['id_student'] : die();
+$product->course = isset($_GET['course']) ? $_GET['course'] : die();
+$product->name = isset($_GET['name']) ? $_GET['name'] : die();
+$product->term = isset($_GET['term']) ? $_GET['term'] : die();
   
 // update the product
 if($product->update()){
