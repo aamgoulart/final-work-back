@@ -18,23 +18,20 @@ $db = $database->getConnection();
 $product = new Student($db);
   
 // get posted data
-$data = json_decode(file_get_contents("php://input"));
+
+$product->id_student = isset($_GET['id_student']) ? $_GET['id_student'] : die();
+$product->course = isset($_GET['course']) ? $_GET['course'] : die();
+$product->name = isset($_GET['name']) ? $_GET['name'] : die();
+$product->term = isset($_GET['term']) ? $_GET['term'] : die();
 
 // make sure data is not empty
 if(
-    !empty($data->name) &&
-    !empty($data->course) &&
-    !empty($data->term) &&
-    !empty($data->id_student)
+    !empty($product->name) &&
+    !empty($product->course) &&
+    !empty($product->term) &&
+    !empty($product->id_student)
 ){
-  
-    // set product property values
-    $product->name = $data->name;
-    $product->course = $data->course;
-    $product->term = $data->term;
-    $product->id_student = $data->id_student;
 
-  
     // create the product
     if($product->create()) {
   
