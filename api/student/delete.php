@@ -19,9 +19,11 @@ $product = new Student($db);
   
 // get product id
 $data = json_decode(file_get_contents("php://input"));
+
+$product->id = isset($_GET['id']) ? $_GET['id'] : die();
   
 // set product id to be deleted
-$product->id = $data->id_student;
+// $product->id = $data->id_student;
   
 // delete the product
 if($product->delete()){
